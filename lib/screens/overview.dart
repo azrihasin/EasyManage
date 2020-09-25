@@ -35,10 +35,10 @@ class _OverviewState extends State<Overview> {
     }
 
     print(foodNotifier.foodList[0].sales);
-
     print(totalprofit(foodNotifier.foodList.length, foodNotifier));
     print(totalsales(foodNotifier.foodList.length, foodNotifier));
     print(totalbalance(foodNotifier.foodList.length, foodNotifier));
+    print('TESY' + totalexpenses(foodNotifier.foodList.length, foodNotifier));
 
     return Scaffold(
       appBar: AppBar(
@@ -207,7 +207,7 @@ String totalprofit(int length, FoodNotifier foodNotifier) {
   num totalexpenses = 0;
   num exacttotal = 0;
 
-  for (int i = 0; i < length; i++) {
+  for (int i = 0; i < foodNotifier.expensesList.length; i++) {
     for (int j = 0; j < foodNotifier.expensesList[i].price.length; j++) {
       expenses =
           expenses + (double.parse(foodNotifier.expensesList[i].price[j]));
@@ -235,7 +235,7 @@ String totalexpenses(int length, FoodNotifier foodNotifier) {
   num expenses = 0;
   num totalexpenses = 0;
 
-  for (int i = 0; i < length; i++) {
+  for (int i = 0; i < foodNotifier.expensesList.length; i++) {
     for (int j = 0; j < foodNotifier.expensesList[i].price.length; j++) {
       expenses = expenses +
           (double.parse(foodNotifier.expensesList[i].price[j].toString()));

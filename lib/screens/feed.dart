@@ -14,7 +14,7 @@ class Feed extends StatefulWidget {
 }
 
 images() {
-  return 'assets/images/download.jpg';
+  return 'assets/images/Asset 9.png';
 }
 
 class Debouncer {
@@ -71,7 +71,7 @@ class _FeedState extends State<Feed> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         title: Text(
-          authNotifier.user != null ? authNotifier.user.displayName : "Feed",
+          "Feed",
         ),
         actions: <Widget>[
           // action button
@@ -124,8 +124,9 @@ class _FeedState extends State<Feed> {
                                     fontFamily: 'Acumin',
                                     fontWeight: FontWeight.bold,
                                     fontSize: 30)),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 60),
+                            Container(
+                              padding: EdgeInsets.only(top: 5),
+                              margin: EdgeInsets.only(right: 30),
                               child: Text(
                                   DateFormat('EEEE, d MMM, yyyy')
                                       .format(date)
@@ -140,7 +141,7 @@ class _FeedState extends State<Feed> {
                         )),
                     Container(
                       //SEARCH BOX
-                      margin: EdgeInsets.only(top: 40),
+                      margin: EdgeInsets.only(top: 37),
                       child: TextField(
                         textAlign: TextAlign.left,
                         controller: searchController,
@@ -151,7 +152,7 @@ class _FeedState extends State<Feed> {
                         //INPUT DECORATION
                         decoration: InputDecoration(
                           isDense: true,
-                          contentPadding: EdgeInsets.only(left: 13, bottom: 30),
+                          contentPadding: EdgeInsets.only(left: 17, bottom: 30),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             borderSide:
@@ -164,7 +165,9 @@ class _FeedState extends State<Feed> {
                           ),
                           fillColor: Color(0xfffbf5f5),
                           filled: true,
+                          prefixIcon: Icon(Icons.search),
                           hintText: 'Filter by name or category',
+                          hintStyle: TextStyle(color: Colors.grey),
                         ),
                         onChanged: (string) {
                           _debouncer.run(() {
@@ -219,7 +222,7 @@ class _FeedState extends State<Feed> {
                           padding: EdgeInsets.all(10.0),
                           child: ListTile(
                             leading: new Container(
-                                width: 58.0,
+                                width: 60.0,
                                 height: 60.0,
                                 decoration: new BoxDecoration(
                                     shape: BoxShape.circle,

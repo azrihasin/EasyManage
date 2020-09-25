@@ -58,6 +58,7 @@ flutter:
   assets:
     - assets/
     - assets/images/background.jpg
+    - assets/images/Asset 1.png
     - assets/images/
 
   fonts:    
