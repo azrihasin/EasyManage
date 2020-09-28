@@ -66,7 +66,7 @@ class _FeedState extends State<Feed> {
     print("building Feed");
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Color(0xfffbf5f5),
+      backgroundColor: Color(0xfffdd426),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -87,121 +87,115 @@ class _FeedState extends State<Feed> {
       body: new RefreshIndicator(
         child: Column(
           children: [
-            Container(
-              //TOP BOX
-              height: 300,
-              padding: EdgeInsets.only(
-                  top: 10, right: 10.0, left: 10.0, bottom: 10.0),
-
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("./assets/images/background.jpg"),
-                    fit: BoxFit.cover),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(15),
-                    bottomLeft: Radius.circular(15)),
-                color: Colors.blue,
-              ),
-
-              child: Container(
-                child: Column(
-                  children: [
-                    Container(
-                        padding: EdgeInsets.only(left: 5.0),
-                        margin: EdgeInsets.only(top: 100.0, bottom: 30.0),
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          children: [
-                            Text(
-                                'Hello ' +
-                                    (authNotifier.user != null
-                                        ? authNotifier
-                                            .user.displayName.sentenceCase
-                                        : "User") +
-                                    ',',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Acumin',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30)),
-                            Container(
-                              padding: EdgeInsets.only(top: 5),
-                              margin: EdgeInsets.only(right: 30),
-                              child: Text(
+            Stack(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 100.0, bottom: 5.0),
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                  'Hello \n' +
+                                      (authNotifier.user != null
+                                          ? authNotifier
+                                              .user.displayName.sentenceCase
+                                          : "User") +
+                                      ',',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Acumin',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30)),
+                              Text(
                                   DateFormat('EEEE, d MMM, yyyy')
                                       .format(date)
                                       .toString(),
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black38,
                                       fontFamily: 'Acumin',
                                       fontSize: 16)),
-                            ),
-                          ],
-                        )),
-                    Container(
-                      //SEARCH BOX
-                      margin: EdgeInsets.only(top: 37),
-                      child: TextField(
-                        textAlign: TextAlign.left,
-                        controller: searchController,
-                        cursorColor: Colors.black,
-                        cursorHeight: 25,
-                        style: TextStyle(fontSize: 19),
+                            ],
+                          )),
+                      Container(
+                        //SEARCH BOX
+                        margin: EdgeInsets.only(top: 37),
+                        child: TextField(
+                          textAlign: TextAlign.left,
+                          controller: searchController,
+                          cursorColor: Colors.black,
+                          cursorHeight: 25,
+                          style: TextStyle(fontSize: 19),
 
-                        //INPUT DECORATION
-                        decoration: InputDecoration(
-                          isDense: true,
-                          contentPadding: EdgeInsets.only(left: 17, bottom: 30),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                            borderSide:
-                                BorderSide(width: 1, color: Color(0xfffbf5f5)),
+                          //INPUT DECORATION
+                          decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding:
+                                EdgeInsets.only(left: 17, bottom: 30),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xfffbf5f5)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xfffbf5f5)),
+                            ),
+                            fillColor: Color(0xfffbf5f5),
+                            filled: true,
+                            prefixIcon: Icon(Icons.search),
+                            hintText: 'Filter by name or category',
+                            hintStyle: TextStyle(color: Colors.grey),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                            borderSide:
-                                BorderSide(width: 1, color: Color(0xfffbf5f5)),
-                          ),
-                          fillColor: Color(0xfffbf5f5),
-                          filled: true,
-                          prefixIcon: Icon(Icons.search),
-                          hintText: 'Filter by name or category',
-                          hintStyle: TextStyle(color: Colors.grey),
-                        ),
-                        onChanged: (string) {
-                          _debouncer.run(() {
-                            setState(() {
-                              if (searchController.text.isNotEmpty) {
-                                print("nice1");
-                                foodNotifier.filteredUsers = foodNotifier
-                                    .foodList
-                                    .where((u) => (u.name
-                                            .toLowerCase()
-                                            .contains(string.toLowerCase()) ||
-                                        u.category
-                                            .toLowerCase()
-                                            .contains(string.toLowerCase())))
-                                    .toList();
-                                // ignore: unrelated_type_equality_checks
-                              } else if (searchController.text.isEmpty) {
-                                print("nice");
-                                setState(() {
-                                  foodNotifier.filteredUsers =
-                                      foodNotifier.foodList;
-                                });
-                              }
+                          onChanged: (string) {
+                            _debouncer.run(() {
+                              setState(() {
+                                if (searchController.text.isNotEmpty) {
+                                  print("nice1");
+                                  foodNotifier.filteredUsers = foodNotifier
+                                      .foodList
+                                      .where((u) => (u.name
+                                              .toLowerCase()
+                                              .contains(string.toLowerCase()) ||
+                                          u.category
+                                              .toLowerCase()
+                                              .contains(string.toLowerCase())))
+                                      .toList();
+                                  // ignore: unrelated_type_equality_checks
+                                } else if (searchController.text.isEmpty) {
+                                  print("nice");
+                                  setState(() {
+                                    foodNotifier.filteredUsers =
+                                        foodNotifier.foodList;
+                                  });
+                                }
+                              });
                             });
-                          });
-                        },
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.only(top: 100, right: 10),
+                  child: Image.asset(
+                    "assets/images/presentation.png",
+                    alignment: Alignment.bottomRight,
+                    width: 500,
+                    height: 100,
+                  ),
+                ),
+              ],
             ),
             Container(
-              padding: EdgeInsets.only(top: 20, right: 30, left: 20),
+              padding: EdgeInsets.only(top: 3, right: 30, left: 20),
               alignment: Alignment.centerLeft,
               child: Text('Customers',
                   style: TextStyle(
@@ -252,6 +246,12 @@ class _FeedState extends State<Feed> {
                                 foodNotifier
                                     .filteredUsers[index].category.sentenceCase,
                                 style: TextStyle(fontFamily: 'Acumin'),
+                              ),
+                            ),
+                            trailing: IconButton(
+                              icon: Icon(
+                                Icons.arrow_right,
+                                color: Colors.black38,
                               ),
                             ),
                             onTap: () {
